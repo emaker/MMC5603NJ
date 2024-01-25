@@ -4,7 +4,7 @@ bool MMC5603NJ::begin(uint8_t addr, TwoWire *theWire) {
     _wire = theWire; 
     _addr = addr;
     uint8_t whoAmI = whoami();
-    Serial.println(whoAmI);
+    // Serial.println(whoAmI);
     if (whoAmI == MMC5603NJ_WHO_AM_I) {
         return true;
     } else {
@@ -47,10 +47,10 @@ float MMC5603NJ::getTemp(){
     return (float)getRawTemp() * 0.8 - 75;
 }
 
-sensorXYZ MMC5603NJ::getRawMag(){
+magSensorXYZ MMC5603NJ::getRawMag(){
     //...
     uint8_t rbuf[9];
-    sensorXYZ raw = {-9999,-9999,-9999};
+    magSensorXYZ raw = {-9999,-9999,-9999};
     //set temp trigger
     uint8_t conf = MMC5603NJ_REG_CONF0_MEASM;
     if(!write(MMC5603NJ_REG_CONF0,&conf,1)){
@@ -86,9 +86,9 @@ sensorXYZ MMC5603NJ::getRawMag(){
 
 }
 
-sensorFloatXYZ MMC5603NJ::getMag(){
-    sensorXYZ raw = {0,0,0};
-    sensorFloatXYZ out = {0,0,0};
+magSensorFloatXYZ MMC5603NJ::getMag(){
+    magSensorXYZ raw = {0,0,0};
+    magSensorFloatXYZ out = {0,0,0};
     raw = getRawMag();
     out.x = (float)raw.x * 0.00625;
     out.y = (float)raw.y * 0.00625;

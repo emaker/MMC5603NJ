@@ -59,13 +59,13 @@ typedef struct {
     int32_t x;
     int32_t y;
     int32_t z;
-} sensorXYZ;
+} magSensorXYZ;
 
 typedef struct {
     float x;
     float y;
     float z;
-} sensorFloatXYZ;  
+} magSensorFloatXYZ;  
 
 // Class
 
@@ -73,8 +73,8 @@ class MMC5603NJ {
     public:
         bool begin(uint8_t addr = MMC5603NJ_DEFAULT_ADDRESS, TwoWire *theWire = &Wire);
         uint8_t whoami();
-        sensorXYZ getRawMag();
-        sensorFloatXYZ getMag();
+        magSensorXYZ getRawMag();
+        magSensorFloatXYZ getMag();
         uint8_t getRawTemp();
         float getTemp();
     private:
