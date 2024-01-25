@@ -37,6 +37,13 @@
 
 #define MMC5603NJ_REG_CONF0_MEASM 0b00000001
 #define MMC5603NJ_REG_CONF0_MEAST 0b00000010
+#define MMC5603NJ_REG_CONF0_FREQ  0b10000000
+#define MMC5603NJ_REG_CONF0_SR    0b00100000
+#define MMC5603NJ_REG_CONF1_BW66  0b00000000
+#define MMC5603NJ_REG_CONF1_BW35  0b00000001
+#define MMC5603NJ_REG_CONF1_BW20  0b00000010
+#define MMC5603NJ_REG_CONF1_BW12  0b00000011
+#define MMC5603NJ_REG_CONF2_CMMEN 0b00010000
 #define MMC5603NJ_REG_STATUS_MEASM 6
 #define MMC5603NJ_REG_STATUS_MEAST 7
 
@@ -73,6 +80,7 @@ class MMC5603NJ {
     public:
         bool begin(uint8_t addr = MMC5603NJ_DEFAULT_ADDRESS, TwoWire *theWire = &Wire);
         uint8_t whoami();
+        void setContinuousMode(uint8_t odr);
         magSensorXYZ getRawMag();
         magSensorFloatXYZ getMag();
         uint8_t getRawTemp();

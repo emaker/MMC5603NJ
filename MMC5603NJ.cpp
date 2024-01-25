@@ -19,6 +19,18 @@ uint8_t MMC5603NJ::whoami() {
     } 
     return -1;
 }
+
+void MMC5603NJ::setContinuousMode(uint8_t odr){
+    uint8_t buf;
+    write(MMC5603NJ_REG_ODR,&odr,1);
+    buf = MMC5603NJ_REG_CONF0_FREQ | MMC5603NJ_REG_CONF0_SR;
+    write(MMC5603NJ_REG_CONF0,&buf,1);
+    buf = MMC5603NJ_REG_CONF1_BW12;
+    write(MMC5603NJ_REG_CONF1,&buf,1);
+    buf = MMC5603NJ_REG_CONF2_CMMEN;
+    write(MMC5603NJ_REG_CONF2,&buf,1);
+}
+
 uint8_t MMC5603NJ::getRawTemp(){
     uint8_t out;
     //set temp trigger
